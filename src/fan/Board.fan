@@ -1,0 +1,6 @@
+
+class Board {
+    new make() {
+        
+    }
+}

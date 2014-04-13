@@ -28,6 +28,22 @@ class Board {
         return rotates % 2 == 0 ? columns : rows;
     }
 
+    Int[][] toList() {
+        result := Int[][,];
+
+        for (i := 0; i < getRows(); ++i) {
+            row := Int[,];
+
+            for (j := 0; j < getColumns(); ++j) {
+                row.push(get(i, j));
+            }
+
+            result.push(row);
+        }
+
+        return result;
+    }
+
     private Int[] derotateCoordinates(Int i, Int j) {
         if (rotates != 0) {
             rotateCoordinates :=

@@ -1,5 +1,14 @@
 
 class BoardTest : Test {
+    Void testToList() {
+        board := Board.make(2, 2);
+        board.set(0, 0, 1);
+        board.set(0, 1, 2);
+        board.set(1, 0, 3);
+        board.set(1, 1, 4);
+        verifyEq([[1, 2], [3, 4]], board.toList);
+    }
+
     Void testRotate() {
         rotateAndCheck([[1, 2],
                         [3, 4],

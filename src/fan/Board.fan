@@ -52,7 +52,7 @@ class Board {
                 : Board#rotateCoordinatesRight.func;
             t := [i, j, getRows, getColumns];
 
-            for (k := 0; k < abs(rotates); ++k) {
+            for (k := 0; k < MathUtils.abs(rotates); ++k) {
                 t = rotateCoordinates(this, t);
             }
 
@@ -78,9 +78,6 @@ class Board {
         return [c - j - 1, i, c, r];
     }
 
-    private Int abs(Int x) {
-        return x >= 0 ? x : -x;
-    }
 
     private Int rows;
     private Int columns;

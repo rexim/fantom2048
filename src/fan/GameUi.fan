@@ -29,12 +29,13 @@ class GameUi: Canvas, IRenderer {
         f := Font { it.name = Desktop.sysFont.name; it.size = 14 };
         g.font = f;
 
-        drawGrid(g);
         drawCells(g);
+        drawGrid(g);
     }
 
     private Void drawGrid(Graphics g) {
         if (renderingBoard != null) {
+            g.brush = Color.black;
             rows := renderingBoard.size;
             columns := renderingBoard[0].size;
             cellWidth := size.w / columns;
@@ -62,6 +63,14 @@ class GameUi: Canvas, IRenderer {
             for (i := 0; i < rows; ++i) {
                 for (j := 0; j < columns; ++j) {
                     if (renderingBoard[i][j] != 0) {
+                        // drawing cell's background
+                        t := MathUtils.min(MathUtils.extractPowerOf2(renderingBoard[i][j]), 5);
+                        g.brush = Color.makeRgb(50 * t, 110, 110);
+                        g.fillRect(j * cellWidth, i * cellHeight,
+                                   cellWidth, cellHeight);
+
+                        // drawing label
+                        g.brush = Color.white;
                         label := renderingBoard[i][j].toStr;
                         x := j * cellWidth + cellWidth / 2 - g.font.width(label) / 2;
                         y := i * cellHeight + cellHeight / 2 - g.font.height / 2;

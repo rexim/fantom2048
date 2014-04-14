@@ -2,8 +2,26 @@ using fwt
 using gfx
 
 class GameUi: Canvas, IRenderer {
+    new make() {
+        onKeyDown.add |e| {
+            if (controller != null) {
+                switch (e.key) {
+                case Key.left:
+                    controller.moveLeft;
+                case Key.right:
+                    controller.moveRight;
+                case Key.up:
+                    controller.moveUp;
+                case Key.down:
+                    controller.moveDown;
+                }
+            }
+        };
+    }
+
     override Void render(Int[][] board) {
         renderingBoard = board;
+        repaint;
     }
 
     override Void onPaint(Graphics g) {

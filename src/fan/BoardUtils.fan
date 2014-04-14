@@ -36,15 +36,21 @@ class BoardUtils {
         stack := Int[,];
         squashedPair := false;
         for (j := 0; j < board.getColumns; ++j) {
-            if (stack.isEmpty || stack.last != board.get(row, j) || squashedPair) {
-                stack.push(board.get(row, j))
-                squashedPair = false;
-            } else {
-                x := stack.pop();
-                stack.push(x + board.get(row, j));
-                squashedPair = true;
+            if (board.get(row, j) != 0) {
+                if (stack.isEmpty || stack.last != board.get(row, j) || squashedPair) {
+                    stack.push(board.get(row, j))
+                    squashedPair = false;
+                } else {
+                    x := stack.pop();
+                    stack.push(x + board.get(row, j));
+                    squashedPair = true;
+                }
+                board.set(row, j, 0);
             }
-            board.set(row, j, 0);
+        }
+
+        for (j := 0; j < stack.size; ++j) {
+            board.set(row, j, stack[j])
         }
     }
 

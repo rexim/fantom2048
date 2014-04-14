@@ -6,8 +6,11 @@ class GameEngine: IController {
     }
 
     override Void moveLeft() {
+        prevBoardState := board.toList
         BoardUtils.squashBoardLeft(board);
-        BoardUtils.addRandomValue(board);
+        if (prevBoardState != board.toList) {
+            BoardUtils.addRandomValue(board);
+        }
         if (renderer != null) {
             renderer.render(board.toList);
         }
@@ -15,24 +18,33 @@ class GameEngine: IController {
     }
 
     override Void moveRight() {
+        prevBoardState := board.toList
         BoardUtils.squashBoardRight(board);
-        BoardUtils.addRandomValue(board);
+        if (prevBoardState != board.toList) {
+            BoardUtils.addRandomValue(board);
+        }
         if (renderer != null) {
             renderer.render(board.toList);
         }
     }
 
     override Void moveUp() {
+        prevBoardState := board.toList
         BoardUtils.squashBoardUp(board);
-        BoardUtils.addRandomValue(board);
+        if (prevBoardState != board.toList) {
+            BoardUtils.addRandomValue(board);
+        }
         if (renderer != null) {
             renderer.render(board.toList);
         }
     }
 
     override Void moveDown() {
+        prevBoardState := board.toList
         BoardUtils.squashBoardDown(board);
-        BoardUtils.addRandomValue(board);
+        if (prevBoardState != board.toList) {
+            BoardUtils.addRandomValue(board);
+        }
         if (renderer != null) {
             renderer.render(board.toList);
         }

@@ -8,6 +8,9 @@ class GameUi: Canvas, IRenderer {
 
     override Void onPaint(Graphics g) {
         super.onPaint(g);
+        f := Font { it.name = Desktop.sysFont.name; it.size = 14 };
+        g.font = f;
+
         drawGrid(g);
         drawCells(g);
     }
@@ -41,9 +44,10 @@ class GameUi: Canvas, IRenderer {
             for (i := 0; i < rows; ++i) {
                 for (j := 0; j < columns; ++j) {
                     if (renderingBoard[i][j] != 0) {
-                        g.drawText(renderingBoard[i][j].toStr,
-                                   j * cellWidth + cellWidth / 2,
-                                   i * cellHeight + cellHeight / 2);
+                        label := renderingBoard[i][j].toStr;
+                        x := j * cellWidth + cellWidth / 2 - g.font.width(label) / 2;
+                        y := i * cellHeight + cellHeight / 2 - g.font.height / 2;
+                        g.drawText(label, x, y);
                     }
                 }
             }

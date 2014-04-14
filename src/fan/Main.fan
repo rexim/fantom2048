@@ -1,3 +1,5 @@
+using fwt
+using gfx
 
 class Main {
     static Void main() {
@@ -7,6 +9,9 @@ class Main {
         gameEngine.renderer = gameUi;
         gameUi.controller = gameEngine;
 
-        echo("Nothing to see here yet.")
+        Window {
+            size = Size(300, 200)
+            gameUi,
+        }.open
     }
 }

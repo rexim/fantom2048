@@ -9,3 +9,7 @@
 * to build: `$ fan src/build.fan`
 * to run:   `$ fan fantom2048`
 * to test:  `$ fant fantom2048`
+
+## Screenshot ##
+
+![Fantom2048 Screenshot](http://i.imgur.com/3iJss3s.png)

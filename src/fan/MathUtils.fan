@@ -1,9 +1,5 @@
 
 class MathUtils {
-    static Int abs(Int x) {
-        return x >= 0 ? x : -x;
-    }
-
     static Int extractPowerOf2(Int x) {
         Int result := 0;
 
@@ -13,9 +9,5 @@ class MathUtils {
         }
 
         return result;
-    }
-
-    static Int min(Int x, Int y) {
-        return x <= y ? x : y;
     }
 }

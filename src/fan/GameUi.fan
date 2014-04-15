@@ -64,7 +64,7 @@ class GameUi: Canvas, IRenderer {
                 for (j := 0; j < columns; ++j) {
                     if (renderingBoard[i][j] != 0) {
                         // drawing cell's background
-                        t := MathUtils.min(MathUtils.extractPowerOf2(renderingBoard[i][j]), 5);
+                        t := MathUtils.extractPowerOf2(renderingBoard[i][j]).min(5);
                         g.brush = Color.makeRgb(50 * t, 110, 110);
                         g.fillRect(j * cellWidth, i * cellHeight,
                                    cellWidth, cellHeight);

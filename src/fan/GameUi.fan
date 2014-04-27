@@ -26,6 +26,10 @@ class GameUi: Canvas, IRenderer {
 
     override Void onPaint(Graphics g) {
         super.onPaint(g);
+
+        g.brush = Color.white;
+        g.fillRect(0, 0, size.w, size.h);
+
         f := Font { it.name = Desktop.sysFont.name; it.size = 14 };
         g.font = f;
 

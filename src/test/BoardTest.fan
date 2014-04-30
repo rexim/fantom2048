@@ -10,23 +10,33 @@ class BoardTest : Test {
     }
 
     Void testRotate() {
-        rotateAndCheck([[1, 2],
-                        [3, 4],
-                        [5, 6]],
-                       [1, -1, -1, 5, 4],
-                       [[[5, 3, 1],
-                         [6, 4, 2]],
-                        [[1, 2],
+        initialState := [[1, 2],
                          [3, 4],
-                         [5, 6]],
-                        [[2, 4, 6],
-                         [1, 3, 5]],
-                        [[1, 2],
-                         [3, 4],
-                         [5, 6]],
-                        [[1, 2],
-                         [3, 4],
-                         [5, 6]]]);
+                         [5, 6]];
+
+        rotations := [1, -1, -1, 5, 4];
+
+        expectedStates := [
+            [[5, 3, 1],
+             [6, 4, 2]],
+
+            [[1, 2],
+             [3, 4],
+             [5, 6]],
+
+            [[2, 4, 6],
+             [1, 3, 5]],
+
+            [[1, 2],
+             [3, 4],
+             [5, 6]],
+
+            [[1, 2],
+             [3, 4],
+             [5, 6]]
+        ];
+
+        rotateAndCheck(initialState, rotations, expectedStates);
     }
 
     Void rotateAndCheck(Int[][] initialState, Int[] rotations, Int[][][] states) {
@@ -38,17 +48,11 @@ class BoardTest : Test {
         }
     }
 
-    Board makeBoardFromState(Int[][] state) {
-        board := Board.make(state.size, state[0].size);
-        for (i := 0; i < state.size; ++i) {
-            for (j := 0; j < state[i].size; ++j) {
-                board.set(i, j, state[i][j]);
-            }
-        }
-        return board;
+    Void verifyBoardState(Int[][] state, Board board) {
+        verifyEq(state, takeStateFromBoard(board));
     }
 
-    Int[][] takeStateFromBoard(Board board) {
+    static Int[][] takeStateFromBoard(Board board) {
         state := Int[][,];
         for (i := 0; i < board.getRows; ++i) {
             row := Int[,];
@@ -60,7 +64,13 @@ class BoardTest : Test {
         return state;
     }
 
-    Void verifyBoardState(Int[][] state, Board board) {
-        verifyEq(state, takeStateFromBoard(board));
+    static Board makeBoardFromState(Int[][] state) {
+        board := Board.make(state.size, state[0].size);
+        for (i := 0; i < state.size; ++i) {
+            for (j := 0; j < state[i].size; ++j) {
+                board.set(i, j, state[i][j]);
+            }
+        }
+        return board;
     }
 }

@@ -17,4 +17,53 @@ class BoardUtilsTest: Test {
         }
         verifyEq(1, notEmptyCells);
     }
+
+    Void testSquashes() {
+        testFunctions := [
+            BoardUtils#squashBoardLeft.func,
+            BoardUtils#squashBoardRight.func,
+            BoardUtils#squashBoardUp.func,
+            BoardUtils#squashBoardDown.func
+        ];
+
+        testData := [
+            [
+                [[2, 2],
+                 [2, 4]],
+
+                [[4, 0],
+                 [2, 4]]
+            ],
+
+            [
+                [[2, 2],
+                 [2, 4]],
+
+                [[0, 4],
+                 [2, 4]]
+            ],
+
+            [
+                [[2, 2],
+                 [2, 4]],
+
+                [[4, 2],
+                 [0, 4]],
+            ],
+
+            [
+                [[2, 2],
+                 [2, 4]],
+
+                [[0, 2],
+                 [4, 4]]
+            ],
+        ];
+
+        for (i := 0; i < testFunctions.size; ++i) {
+            board := BoardTest.makeBoardFromState(testData[i][0]);
+            testFunctions[i](board);
+            verifyEq(testData[i][1], BoardTest.takeStateFromBoard(board));
+        }
+    }
 }

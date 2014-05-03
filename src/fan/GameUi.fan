@@ -27,12 +27,7 @@ class GameUi: Canvas, IRenderer {
     override Void onPaint(Graphics g) {
         super.onPaint(g);
 
-        g.brush = Color.white;
-        g.fillRect(0, 0, size.w, size.h);
-
-        f := Font { it.name = Desktop.sysFont.name; it.size = 14 };
-        g.font = f;
-
+        clearCanvas(g);
         drawCells(g);
         drawGrid(g);
     }
@@ -67,22 +62,20 @@ class GameUi: Canvas, IRenderer {
             for (i := 0; i < rows; ++i) {
                 for (j := 0; j < columns; ++j) {
                     if (renderingBoard[i][j] != 0) {
-                        // drawing cell's background
-                        t := MathUtils.extractPowerOf2(renderingBoard[i][j]).min(5);
-                        g.brush = Color.makeRgb(50 * t, 110, 110);
-                        g.fillRect(j * cellWidth, i * cellHeight,
-                                   cellWidth, cellHeight);
-
-                        // drawing label
-                        g.brush = Color.white;
-                        label := renderingBoard[i][j].toStr;
-                        x := j * cellWidth + cellWidth / 2 - g.font.width(label) / 2;
-                        y := i * cellHeight + cellHeight / 2 - g.font.height / 2;
-                        g.drawText(label, x, y);
+                        RenderUtils.renderCell(g, Rect.make(j * cellWidth,
+                                                            i * cellHeight,
+                                                            cellWidth,
+                                                            cellHeight),
+                                               renderingBoard[i][j]);
                     }
                 }
             }
         }
+    }
+
+    private Void clearCanvas(Graphics g) {
+        g.brush = Color.white;
+        g.fillRect(0, 0, size.w, size.h);
     }
 
     IController? controller := null;
